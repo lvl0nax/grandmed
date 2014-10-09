@@ -1,0 +1,43 @@
+.step_content{
+  margin-top: 45px;
+  height: 410px;
+}
+.step_content__background{
+  float: left;
+  width: 530px;
+}
+.step_content__body{
+  float: right;
+  width: 470px;
+}
+.step_content__body__title{
+  color:  #7296a6;
+  font-size: 30px;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+.step_content__body__text{
+  font-family: Tahoma;
+  color:  #434343;
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 30px;
+}
+.backgrounds_list{
+  text-align: center;
+  .background_image{
+    cursor: pointer;
+    text-align: center;
+    width: 19.5%;
+    display: inline-block;
+    &:hover{
+      opacity: 0.8;
+    }
+  }
+  .selected_background{
+    opacity: 0.5;
+    &:hover{
+      opacity: 0.5;
+    }
+  }
+}
