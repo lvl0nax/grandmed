@@ -6,12 +6,12 @@ class Picture < ActiveRecord::Base
 
   def self.make_with_text(text, bkgnd)
     pic = Picture.new
-    img =  ImageList.new('public'+bkgnd.image_url(:thumb))
+    img =  ImageList.new('public'+bkgnd.image_url(:big))
     txt = Draw.new
-    str = text.gsub(/(.{1,#{36}})(\s+|$)/, "\\1\n").strip
+    str = text.gsub(/(.{1,#{38}})(\s+|$)/, "\\1\n").strip
     img.annotate(txt, 0,0,0,50, str){
       txt.pointsize = 25
-      txt.stroke = '#000000'
+      #txt.stroke = '#000000'
       txt.fill = '#ffffff'
       txt.gravity = NorthGravity
     }
@@ -19,6 +19,6 @@ class Picture < ActiveRecord::Base
     img.write('test.jpg')
     pic.description = text
     pic.image = File.open('test.jpg')
-    pic.save!
+    pic.save! ? pic : nil
   end
 end

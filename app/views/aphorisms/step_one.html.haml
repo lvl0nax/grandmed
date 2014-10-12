@@ -9,10 +9,10 @@
       .step_content__body__text
         Текст-подсказка: lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
       .step_content__body__actions
-        = link_to 'ДОБАВИТЬ АФОРИЗМ >', '#', {class: 'red_button_link'}
+        = link_to 'ДОБАВИТЬ АФОРИЗМ >', step_two_path(background: @backgrounds.first.id), {class: 'red_button_link js_next_step_link'}
   .clearfix
   .backgrounds_list
     - @backgrounds.each_with_index do |background, i|
       - klass = (i == 0 ? 'selected_background' : '')
-      .background_image.js_background{data: { img: background.image_url(:big) }, class: klass}
+      .background_image.js_background{data: { img: background.image_url(:big), id: background.id }, class: klass}
         = image_tag background.image_url(:thumb)

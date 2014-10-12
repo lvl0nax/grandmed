@@ -19,5 +19,23 @@ $(document).on 'click', '.js_background', (e) ->
   e.preventDefault()
   $('.selected_background').removeClass('selected_background')
   src = $(e.currentTarget).data('img')
+  id = $(e.currentTarget).data('id')
   $(e.currentTarget).addClass('selected_background')
   $('.js_big_background').attr('src', src)
+  url = $('.js_next_step_link').attr('href').split('=')[0] + "=#{id}"
+  $('.js_next_step_link').attr('href', url)
+
+$(document).on 'click', '.js_make_aphorism', (e) ->
+  e.preventDefault()
+  txt = $('#aphorism_input').val()
+  id = $(e.currentTarget).data('bkg')
+  console.log '++++++++++++++++++++'
+  $.ajax(
+    type: 'POST'
+    dataType: 'json'
+    url: '/make_aphorism'
+    data:
+      image: id
+      description: txt
+  ).done (msg) ->
+    window.location = msg.url

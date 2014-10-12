@@ -16,7 +16,7 @@ ActiveAdmin.register Picture do
       row :description
       row :author
       row :image do
-        image_tag(picture.image.url(:thumb))
+        image_tag(picture.image.url(:big))
       end
     end
     active_admin_comments

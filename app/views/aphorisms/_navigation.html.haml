@@ -1,20 +1,20 @@
 .navigation
   .navigation_content
-    .first_step.active_step
+    .first_step{class: ('active_step' if params[:action] == 'step_one')}
       .step_number
         01
       .step_title
         ВЫБЕРИТЕ ФОН
       .step_narrow
         >
-    .second_step
+    .second_step{class: ('active_step' if params[:action] == 'step_two')}
       .step_number
         02
       .step_title
-        ДОБАВТЕ АФОРИЗМ
+        ДОБАВЬТЕ АФОРИЗМ
       .step_narrow
         >
-    .third_step
+    .third_step{class: ('active_step' if params[:action] == 'step_three')}
       .step_number
         03
       .step_title

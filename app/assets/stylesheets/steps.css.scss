@@ -10,7 +10,8 @@
   float: right;
   width: 470px;
 }
-.step_content__body__title{
+.step_content__body__title,
+.aphorisms_title{
   color:  #7296a6;
   font-size: 30px;
   font-weight: 400;
@@ -40,4 +41,24 @@
       opacity: 0.5;
     }
   }
+}
+
+
+/*--------------step_two---------------*/
+.step_content__body__input{
+  margin-bottom: 15px;
+}
+.background_for_text{
+  position: relative;
+}
+.step_content__background__text{
+  position: absolute;
+  top: 50px;
+  left: 33px;
+  width: 460px;
+  word-wrap: break-word;
+  font-size: 26px;
+  color: #ffffff;
+  text-align: center;
+  font-weight: bold;
 }
