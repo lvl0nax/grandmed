@@ -1,88 +1,89 @@
-.main_container{
+.main_page__container{
   width: 100%;
   min-height: 100%;
   background: image_url('grand_med.png') top center no-repeat;
   background-size: 100%;
-}
-.logo{
-  background: image_url('logo.png') no-repeat;
-  width: 243px;
-  height: 53px;
-  margin: 0 auto;
-}
-.main_content{
-  padding-top: 70px;
-  width: 100%;
-  padding-bottom: 50px;
-}
-.main_content__text{
-  margin-top: 50px;
-  color: white;
-  text-align: center;
-}
-.main_content__text__title{
-  margin-bottom: 40px;
-  .big_title{
-    font-size: 60px !important;
+  .logo{
+    background: image_url('logo.png') no-repeat;
+    width: 243px;
+    height: 53px;
+    margin: 0 auto;
   }
-  .med_title{
-    font-size: 30px !important;
+  .main_content{
+    padding-top: 70px;
+    width: 100%;
+    padding-bottom: 50px;
   }
-}
-.main_content__text__body{
-  font-size: 24px;
-  width: 750px;
-  margin: 0 auto;
-}
-
-.white_button_link{
-  display: inline-block;
-  border: 3px solid #fff;
-  color:  #fff !important;
-  font-size: 18px;
-  font-weight: 700;
-  padding: 15px;
-  text-decoration: none !important;
-}
-.white_button_link:hover{
-  background: #fff;
-  color: #4e5672 !important;
-}
-
-.main_content__text__button{
-  text-align: center;
-  margin: 50px auto 20px;
-}
-.main_content__text__links{
-  text-align: center;
-  margin-top: 20px;
-  margin-bottom: 70px;
-  a{
+  .main_content__text{
+    margin-top: 50px;
     color: white;
-    font-size: 14px;
-    padding: 0 20px;
-    &:hover{
-      color: white;
+    text-align: center;
+  }
+  .main_content__text__title{
+    margin-bottom: 40px;
+    .big_title{
+      font-size: 60px !important;
+    }
+    .med_title{
+      font-size: 30px !important;
     }
   }
-}
-
-.main_content__text__aphorisms{
-  background-color: rgba(0, 0, 0, 0.30);;
-  margin: 0 auto;
-  width: 860px;
-  height: 126px;
-  padding: 40px 80px;
-}
-.main_content__text__aphorisms__title{
-  float: left;
-  color:  #ffffff;
-  font-size: 24px;
-  line-height: 126px;
-}
-.main_content__text__aphorisms__top{
-  float: right;
-  img{
-    padding: 0 10px;
+  .main_content__text__body{
+    font-size: 24px;
+    width: 750px;
+    margin: 0 auto;
   }
+
+  .white_button_link{
+    display: inline-block;
+    border: 3px solid #fff;
+    color:  #fff !important;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 15px;
+    text-decoration: none !important;
+  }
+  .white_button_link:hover{
+    background: #fff;
+    color: #4e5672 !important;
+  }
+
+  .main_content__text__button{
+    text-align: center;
+    margin: 50px auto 20px;
+  }
+  .main_content__text__links{
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 70px;
+    a{
+      color: white;
+      font-size: 14px;
+      padding: 0 20px;
+      &:hover{
+        color: white;
+      }
+    }
+  }
+
+  .main_content__text__aphorisms{
+    background-color: rgba(0, 0, 0, 0.30);;
+    margin: 0 auto;
+    width: 860px;
+    height: 126px;
+    padding: 40px 80px;
+  }
+  .main_content__text__aphorisms__title{
+    float: left;
+    color:  #ffffff;
+    font-size: 24px;
+    line-height: 126px;
+  }
+  .main_content__text__aphorisms__top{
+    float: right;
+    img{
+      padding: 0 10px;
+    }
+  }
+
 }

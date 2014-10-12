@@ -121,7 +121,9 @@ html, body {
   width: $width;
   margin: 0 auto;
 }
-
+.main_container{
+  margin-bottom: 40px;
+}
 .red_button_link{
   display: inline-block;
   border: 3px solid #c83a2e;
