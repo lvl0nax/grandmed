@@ -1,0 +1,21 @@
+= render 'navigation'
+.main_content
+  .step_content
+    .step_content__background.background_for_text
+      = image_tag @picture.image_url(:big),{class: 'js_big_background'}
+      .step_content__background__text.js_aphorism_text
+    .step_content__body
+      .step_content__body__title
+        Опубликуйте афоризм
+      .step_content__body__text
+        Текст-подсказка: lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      .step_content__body__actions
+        = link_to 'ОПУБЛИКОВАТЬ АФОРИЗМ >', '#', {class: 'red_button_link js_make_aphorism', data: {bkg: params[:background]}}
+  .clearfix
+  .aphorisms_title
+    Лучшие афоризмы
+  .backgrounds_list
+    - @aphorisms.each_with_index do |background, i|
+      .background_image{data: { img: background.image_url(:thumb) }}
+        = image_tag background.image_url(:thumb)
+

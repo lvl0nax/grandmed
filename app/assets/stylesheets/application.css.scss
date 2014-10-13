@@ -1,0 +1,139 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+$width: 1024px;
+html,body,div,span,h1,h2,h3,h4,b,u,i,s,em,form,fieldset,label,legend,input,button,textarea,a,p,table,caption,tbody,thead,tr,th,td, ul, li, ol{margin:0;padding:0;outline:none;}
+table {border-collapse:collapse;border-spacing:0; font-size:inherit;font:100%;}
+fieldset,img {border:0;}
+caption,th,td{text-align:left; padding: 0 10px; }
+input,button,textarea,select,th,optgroup,option {font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;}
+html, body {height:100%; color: #58595b;}
+a, .jslink{color: blue}
+a:hover, .jslink:hover{color: #F15A2A}
+.jslink{text-decoration: underline; cursor: pointer}
+.jslink:hover{text-decoration: none}
+body{font: 13px Helvetica,sans-serif;background: #fff}
+a{cursor: pointer}
+.clearfix{
+  clear: both;
+}
+
+h1 {font-size: 26px;}
+h2 {font-size: 21px;}
+h3 {font-size: 19px;}
+h4 {font-size: 17px;}
+h1, h2, h3, .normal {font-weight: normal;color: #333132;margin: 0 0 0.35em;line-height: 1em;}
+
+#root_page{
+  font-family: 'Oldsman';
+}
+html, body {
+  height: 100%;
+  margin: 0 auto;
+  padding: 0;
+}
+.header{
+  width: $width;
+  margin: 0 auto;
+  height: 85px;
+  padding-top: 25px;
+  .logo{
+    margin: 20px 0;
+    color:  #c83a2e;
+    font-size: 30px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .header__pages_links{
+    width: 72%;
+    padding-top: 10px;
+    float: right;
+    text-align: center;
+    a{
+      text-decoration: none;
+      padding: 0 30px;
+      color:  #7296a6;
+      font-size: 18px;
+      font-weight: 400;
+    }
+  }
+}
+
+.navigation{
+  height: 108px;
+  background-image: image_url('nav_background2.png');
+}
+.navigation_content{
+  padding-top: 25px;
+  width: $width;
+  margin: 0 auto;
+  line-height: 56px;
+  color:  rgba(255, 255, 255, 0.7);
+  font-size: 16px;
+  font-weight: 700;
+}
+.first_step, .second_step, .third_step{
+  display: inline-block;
+}
+.step_number{
+  float: left;
+  width: 52px;
+  height: 52px;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  border-radius: 30px;
+  color:  rgba(255, 255, 255, 0.7);
+  font-size: 30px;
+  margin: 0 15px 0 0;
+  text-align: center;
+}
+.step_title{
+  float: left;
+  width: 220px;
+}
+.step_narrow{
+  float: left;
+  margin-right: 60px;
+}
+.active_step{
+  color:  #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  .step_number{
+    border: 2px solid rgba(255, 255, 255, 1);
+    color:  #7296a6;
+    background: #fff;
+  }
+
+}
+.main_content{
+  width: $width;
+  margin: 0 auto;
+}
+.main_container{
+  margin-bottom: 40px;
+}
+.red_button_link{
+  display: inline-block;
+  border: 3px solid #c83a2e;
+  color:  #c83a2e !important;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 15px;
+  text-decoration: none !important;
+}
+.red_button_link:hover{
+  background: #c83a2e;
+  color: white !important;
+}

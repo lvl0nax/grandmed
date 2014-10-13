@@ -1,0 +1,18 @@
+!!!
+%html
+  %head
+    %title GrandMed
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    .header
+      %a.logo{href: '/'}
+        Гранд-Афоризм
+
+      .header__pages_links
+        %a.header__pages_links__rooles{href: '#'} Правила конкурса
+        %a.header__pages_links__rating{href: '#'} Рейтинг участников
+
+    .main_container
+      = yield

@@ -1,0 +1,21 @@
+.navigation
+  .navigation_content
+    .first_step{class: ('active_step' if params[:action] == 'step_one')}
+      .step_number
+        01
+      .step_title
+        ВЫБЕРИТЕ ФОН
+      .step_narrow
+        >
+    .second_step{class: ('active_step' if params[:action] == 'step_two')}
+      .step_number
+        02
+      .step_title
+        ДОБАВЬТЕ АФОРИЗМ
+      .step_narrow
+        >
+    .third_step{class: ('active_step' if params[:action] == 'step_three')}
+      .step_number
+        03
+      .step_title
+        ОПУБЛИКУЙТЕ АФОРИЗМ
