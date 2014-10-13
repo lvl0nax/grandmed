@@ -18,10 +18,10 @@
       = link_to 'Правила конкурса', '#'
       = link_to 'Рейтинг участников', '#'
 
-    .main_content__text__aphorisms
-      .main_content__text__aphorisms__title
-        Лучшие афоризмы:
-      .main_content__text__aphorisms__top
-        - if Picture.any?
+    - if Picture.any?
+      .main_content__text__aphorisms
+        .main_content__text__aphorisms__title
+          Лучшие афоризмы:
+        .main_content__text__aphorisms__top
           - Picture.last(3).each do |pic|
             = image_tag pic.image_url(:thumb)
