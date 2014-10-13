@@ -137,3 +137,38 @@ html, body {
   background: #c83a2e;
   color: white !important;
 }
+.white_button_link{
+  display: inline-block;
+  border: 3px solid #fff;
+  color:  #fff !important;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 15px;
+  text-decoration: none !important;
+  line-height: normal;
+}
+.white_button_link:hover{
+  background: #fff;
+  color: #4e5672 !important;
+}
+/*---------------rules-----------------*/
+
+.navigation_content__page_title{
+  float: left;
+  font-weight: normal;
+  font-size: 42px;
+  color: white;
+}
+.navigation_content__button{
+  float: right;
+}
+.main_content__rules_text{
+  padding: 30px 0;
+  width: 615px;
+  float: left;
+}
+.main_content__vk_widget{
+  float: right;
+  padding-top: 30px;
+}
+/*---------------end rules-----------------*/

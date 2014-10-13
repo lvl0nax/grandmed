@@ -4,6 +4,10 @@ class AphorismsController < ApplicationController
 
   def home;  end
 
+  def rules
+    @aphorisms = Picture.last(5)
+  end
+
   def step_one
     @backgrounds = Background.first(10)
   end

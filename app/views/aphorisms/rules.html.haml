@@ -1,0 +1,27 @@
+.navigation
+  .navigation_content
+    .navigation_content__page_title
+      Правила конкурса
+    .navigation_content__button
+      = link_to 'УЧАСТВОВАТЬ В КОНКУРСЕ >', step_one_path, {class: 'white_button_link'}
+.main_content
+  .main_content__rules_text
+    Год назад я довел свое первое рельсовое приложение до приемлемого вида. Вопрос использования готового кода в продакшене ранее меня не заинтересовал. С чего вдруг? Несложный язык, лаконичный фреймворк — уж деплой-то явно не сложнее, чем преодоление ментального тормоза после PHP.
+    %br
+    %br
+    Команда разработчиков Rails рекомендует использовать Phusion Passenger, он что-то вроде mod_php — установил, разместил файлы и полетел. На момент изучения вопроса на форумах хватало баталий о производительности решений; Passenger в них фаворитом не значился.
+    %br
+    %br
+    Совета относительно альтернативы я спросил у техдиректора сайта с миллионом уников в сутки — тот отправил меня гуглить на тему Nginx и Unicorn. Инструкция по настройке продакшена, найденная на Хабре, датировалась 2009 годом. Помимо прочего, ее просто переполняли изъяны уроков «Как нарисовать сову».
+  .main_content__vk_widget#vk_groups
+
+  .clearfix
+  .aphorisms_title
+    Лучшие афоризмы
+  .backgrounds_list
+    - @aphorisms.each do |background|
+      .background_image{data: { img: background.image_url(:thumb) }}
+        = image_tag background.image_url(:thumb)
+
+:javascript
+  VK.Widgets.Group("vk_groups", {mode: 0, width: "300", height: "250"}, 32373473);
