@@ -11,6 +11,7 @@
 # Если вы используете другую систему управления зависимостями,
 # закомментируйте эту строку.
 require 'bundler/capistrano'
+require 'whenever/capistrano'
 
 ## Чтобы не хранить database.yml в системе контроля версий, поместите
 ## dayabase.yml в shared-каталог проекта на сервере и раскомментируйте
@@ -64,6 +65,8 @@ role :db,             deploy_server, :primary => true
 set :rvm_ruby_string, "2.1.2"
 set :rake,            "rvm use #{rvm_ruby_string} do bundle exec rake"
 set :bundle_cmd,      "rvm use #{rvm_ruby_string} do bundle"
+
+set :whenever_command, "rvm use #{rvm_ruby_string} do bundle exec whenever"
 
 # Настройка системы контроля версий и репозитария,
 # по умолчанию - git, если используется иная система версий,

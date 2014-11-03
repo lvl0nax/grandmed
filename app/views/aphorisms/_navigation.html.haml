@@ -14,7 +14,7 @@
         ДОБАВЬТЕ АФОРИЗМ
       .step_narrow
         >
-    .third_step{class: ('active_step' if params[:action] == 'step_three')}
+    .third_step{class: ('active_step' if (params[:action] == 'step_three' && @picture && @picture.author.blank?))}
       .step_number
         03
       .step_title

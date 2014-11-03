@@ -24,6 +24,12 @@
   font-weight: 400;
   margin-bottom: 30px;
 }
+.step_content__body__actions{
+  .red_button_link{
+    display: inline-block;
+    float: left;
+  }
+}
 .backgrounds_list{
   text-align: center;
   .background_image{

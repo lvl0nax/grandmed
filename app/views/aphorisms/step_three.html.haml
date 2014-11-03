@@ -1,3 +1,10 @@
+- content_for :js_src do
+  %script{:src => "//vk.com/js/api/openapi.js?115", :type => "text/javascript"}
+  %script{:charset => "windows-1251", :src => "http://vk.com/js/api/share.js?90", :type => "text/javascript"}
+
+:javascript
+  VK.init({apiId: 4617493});
+
 = render 'navigation'
 .main_content
   .step_content
@@ -5,12 +12,29 @@
       = image_tag @picture.image_url(:big),{class: 'js_big_background'}
       .step_content__background__text.js_aphorism_text
     .step_content__body
-      .step_content__body__title
-        Опубликуйте афоризм
-      .step_content__body__text
-        Текст-подсказка: lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      .step_content__body__actions
-        = link_to 'ОПУБЛИКОВАТЬ АФОРИЗМ >', '#', {class: 'red_button_link js_make_aphorism', data: {bkg: params[:background]}}
+      - if @picture.author
+        .step_content__body__title
+          Конкурс афоризмов
+        .step_content__body__text
+          Автор:
+          = link_to @picture.username, "http://vk.com/id#{@picture.author}", {target: '_blank', rel: 'nofollow'}
+      - else
+        - if params[:uid].present?
+          .step_content__body__title
+            Опубликуйте афоризм
+          .step_content__body__text
+            Текст-подсказка: lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          .step_content__body__actions
+            = link_to 'ОПУБЛИКОВАТЬ АФОРИЗМ >', '#', {class: 'red_button_link js_public_aphorism', data: {pic: params[:picture_id], username: params[:first_name]+' '+params[:last_name], author: params[:uid]}, onclick: 'return VK.Share.click(0, this);'}
+            = image_tag 'http://vk.com/images/share_32.png', { width: '57', height: '57'}
+
+        - else
+          .step_content__body__title
+            Авторизуйтесь через ВКонтакте
+          .step_content__body__text
+            Авторизация необходима только для сбора статистики по опубликованному во ВКонтакте грандмед-афоризму
+          .step_content__body__actions
+            #vk_auth
   .clearfix
   .aphorisms_title
     Лучшие афоризмы
@@ -19,3 +43,34 @@
       .background_image{data: { img: background.image_url(:thumb) }}
         = image_tag background.image_url(:thumb)
 
+:javascript
+
+  VK.Widgets.Auth("vk_auth", {width: "200px", authUrl: "#{request.env['PATH_INFO']}"});
+
+  $(document).on('click', '.js_public_aphorism', function(e){
+    var text = document.URL.split('?')[0];
+    e.preventDefault();
+    VK.Api.call('wall.post', {
+        owner_id: "#{params[:uid]}",
+        from_group: 0,
+        message: text + ' \n Конкурс афоризмов от грандмед',
+        attachments: "#{image_url(@picture.image_url(:big))}"
+      }, function(r) {
+        if (r.response){
+          $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: '/update_aphorism',
+            data: {
+              id: $(e.currentTarget).data('pic'),
+              username: $(e.currentTarget).data('username'),
+              author: $(e.currentTarget).data('author'),
+              post_id: r.response.post_id
+            }
+          }).done(function(msg) {
+            return window.location = text;
+          });
+        }
+      }
+    );
+  });

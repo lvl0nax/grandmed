@@ -25,12 +25,23 @@ class AphorismsController < ApplicationController
     end
   end
 
+  def update_aphorism
+    pic = Picture.find params[:id]
+    if pic.update(
+          author: params[:author],
+          username: params[:username],
+          post_id: params[:post_id]
+        )
+      render json: {status: :ok}
+    end
+  end
+
   def step_three
     @aphorisms = Picture.last(5)
     @picture = Picture.find(params[:picture_id])
   end
 
   def permitted_params
-    params.permit [:image, :description, :author]
+    params.permit [:image, :description, :author, :username, :post_id]
   end
 end
