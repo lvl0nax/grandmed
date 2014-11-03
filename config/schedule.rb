@@ -17,7 +17,7 @@ set :output, 'cron_log.log'
 #   runner "AnotherModel.prune_old_records"
 # end
 
-every 5.minutes do
+every 5.hours do
   command 'cd ~/projects/aphorism/current && rvm use 2.1.2 do bundle exec rake update_rating_aphorism RAILS_ENV=production'
   #rake 'update_rating_aphorism'
 end
