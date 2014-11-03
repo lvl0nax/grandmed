@@ -18,6 +18,15 @@
         .step_content__body__text
           Автор:
           = link_to @picture.username, "http://vk.com/id#{@picture.author}", {target: '_blank', rel: 'nofollow'}
+          %br
+          Рейтинг:
+          = @picture.rating
+          %br
+          likes:
+          = @picture.likes
+          %br
+          reposts:
+          = @picture.shares
       - else
         - if params[:uid].present?
           .step_content__body__title
