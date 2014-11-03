@@ -18,6 +18,7 @@ set :output, 'cron_log.log'
 # end
 
 every 5.minutes do
-  rake 'update_rating_aphorism'
+  command 'rvm use 2.1.2 do bundle exec rake update_rating_aphorism RAILS_ENV=production'
+  #rake 'update_rating_aphorism'
 end
 # Learn more: http://github.com/javan/whenever
