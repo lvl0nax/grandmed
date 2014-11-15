@@ -48,7 +48,9 @@
     }
   }
 }
-
+.error_notification{
+  color: red;
+}
 
 /*--------------step_two---------------*/
 .step_content__body__input{
@@ -68,3 +70,53 @@
   text-align: center;
   font-weight: bold;
 }
+
+#login_button{
+  table{
+    width: initial;
+    td:last-child{
+      display: none;
+    }
+  }
+}
+
+
+/*-----------------------rating --------------------------*/
+.rating_item{
+  padding: 15px 0;
+  border-bottom: 1px solid #d8d8d8;
+}
+.header_rating_item{
+  .rating_item__name,
+  .rating_item__aphorism,
+  .rating_item__rate{
+    color:  #7d7d7d;
+    font-size: 14px;
+    font-weight: normal;
+  }
+}
+.rating_item__name{
+  float: left;
+  color:  #222222;
+  font-size: 18px;
+  width: 330px;
+}
+.rating_top{
+  font-weight: bold;
+}
+.rating_item__aphorism{
+  float: left;
+  width: 175px;
+}
+.rating_item__rate{
+  float: left;
+  color:  #222222;
+  font-size: 18px;
+  font-weight: 700;
+  width: 98px;
+  text-align: center;
+}
+.rating_pagination{
+  float: left;
+}
+/*-----------------------end rating --------------------------*/

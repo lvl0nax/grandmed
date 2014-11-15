@@ -1,6 +1,5 @@
 - content_for :js_src do
-  %script{:src => "//vk.com/js/api/openapi.js?115", :type => "text/javascript"}
-  %script{:charset => "windows-1251", :src => "http://vk.com/js/api/share.js?90", :type => "text/javascript"}
+  %script{:src => "//vk.com/js/api/openapi.js", :type => "text/javascript"}
 
 :javascript
   VK.init({apiId: 4617493});
@@ -18,15 +17,7 @@
         .step_content__body__text
           Автор:
           = link_to @picture.username, "http://vk.com/id#{@picture.author}", {target: '_blank', rel: 'nofollow'}
-          %br
-          Рейтинг:
-          = @picture.rating
-          %br
-          likes:
-          = @picture.likes
-          %br
-          reposts :
-          = @picture.shares
+
       - else
         - if params[:uid].present?
           .step_content__body__title
@@ -34,7 +25,7 @@
           .step_content__body__text
             Текст-подсказка: lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
           .step_content__body__actions
-            = link_to 'ОПУБЛИКОВАТЬ АФОРИЗМ >', '#', {class: 'red_button_link js_public_aphorism', data: {pic: params[:picture_id], username: params[:first_name]+' '+params[:last_name], author: params[:uid]}, onclick: 'return VK.Share.click(0, this);'}
+            = link_to 'ОПУБЛИКОВАТЬ АФОРИЗМ >', '#', {class: 'red_button_link js_public_aphorism', data: {pic: params[:picture_id]}}
             = image_tag 'http://vk.com/images/share_32.png', { width: '57', height: '57'}
 
         - else
@@ -43,43 +34,114 @@
           .step_content__body__text
             Пожалуйста, войдите через виджет Вконтакте. Авторизация необходима только для сбора статистики по опубликованному во ВКонтакте грандмед-афоризму.
           .step_content__body__actions
-            #vk_auth
+
+            #login_button{onclick: 'VK.Auth.login(authInfo, VK.access.PHOTOS);'}
+
   .clearfix
   .aphorisms_title
     Лучшие афоризмы
   .backgrounds_list
-    - @aphorisms.each_with_index do |background, i|
+    - @aphorisms.each do |background|
       .background_image{data: { img: background.image_url(:thumb) }}
-        = image_tag background.image_url(:thumb)
+        %a{ href: step_three_path(background.id) }
+          = image_tag background.image_url(:thumb)
+- unless @picture.author
+  :javascript
 
-:javascript
+    VK.Auth.getLoginStatus(authInfo);
+    if (window.location.search.substring('uid').length > 4){}
+    else{
+      VK.UI.button('login_button');
+    }
 
-  VK.Widgets.Auth("vk_auth", {width: "200px", authUrl: "#{request.env['PATH_INFO']}"});
-
-  $(document).on('click', '.js_public_aphorism', function(e){
-    var text = document.URL.split('?')[0];
-    e.preventDefault();
-    VK.Api.call('wall.post', {
-        owner_id: "#{params[:uid]}",
-        from_group: 0,
-        message: text + ' \n Конкурс афоризмов от грандмед',
-        attachments: "#{image_url(@picture.image_url(:big))}"
-      }, function(r) {
-        if (r.response){
-          $.ajax({
-            type: 'POST',
-            dataType: 'json',
-            url: '/update_aphorism',
-            data: {
-              id: $(e.currentTarget).data('pic'),
-              username: $(e.currentTarget).data('username'),
-              author: $(e.currentTarget).data('author'),
-              post_id: r.response.post_id
-            }
-          }).done(function(msg) {
-            return window.location = text;
-          });
-        }
+    function authInfo(response) {
+      if (response.session) {
+        prepare_wall_post_vk(response);
+      } else {
+        console.log('not auth');
       }
-    );
-  });
+    }
+
+    $(document).on('click', '.js_public_aphorism', function(e){
+      e.preventDefault();
+      var name;
+      if (typeof localStorage['vk_user_name'] != 'undefined'){
+        name = localStorage['vk_user_name']
+      }
+      else{
+        name = 'id' + localStorage['vk_user_id']
+      }
+
+      VK.api('wall.post', {
+          owner_id: localStorage['vk_user_id'],
+          from_group: 0,
+          message: 'Создаю афоризмы вместе с ГрандМедом http://grandaforizm.ru',
+          attachments: localStorage['vk_photo_upload']
+        }, function(data) {
+          if (data.response){
+            $.ajax({
+              type: 'POST',
+              dataType: 'json',
+              url: '/update_aphorism',
+              data: {
+                id: "#{params[:picture_id]}",
+                username: name,
+                author: localStorage['vk_user_id'],
+                post_id: data.response.post_id
+              }
+            }).done(function(msg) {
+              window.location = document.URL.split('?')[0];
+            });
+          }
+        }
+      );
+    });
+
+    function prepare_wall_post_vk(response){
+      if (window.location.search.substring('uid').length > 4){}
+      else{
+        var text = document.URL.split('?')[0];
+        var title = 'Конкурс афоризмов - GrandMed';
+        var imglink = "#{image_url(@picture.image_url(:big))}";
+        var user_id = response.session.mid;
+        if (typeof response.user != 'undefined'){
+          localStorage['vk_user_name'] = response.user.last_name + ' ' + response.user.last_name;
+        }
+        VK.api('photos.getWallUploadServer', {
+          uid: user_id
+        }, function (data) {
+          if (data.response) {
+            $.ajax({
+              type: 'GET',
+              dataType: 'json',
+              url: '/aphorisms/vk_answer',
+              data: {
+                photo: imglink,
+                upload_url: data.response.upload_url
+              }
+            }).done( function(json){
+              VK.api("photos.saveWallPhoto", {
+                  server: json.server,
+                  photo: json.photo,
+                  hash: json.hash,
+                  uid: user_id
+                }, function(data){
+                  localStorage['vk_user_id'] = user_id;
+                  localStorage['vk_photo_upload'] = data.response['0'].id;
+                  if (typeof localStorage['vk_user_name'] == 'undefined'){
+                    VK.Api.call('users.get', {uids: user_id, fields: 'first_name,last_name'}, function(r) {
+                      if (r.response){
+                        localStorage['vk_user_name'] = r.response[0].first_name + ' ' + r.response[0].last_name;
+                      }
+                    });
+                  }
+                  return window.location = window.location + '?uid='+ user_id;
+                }
+              );
+            }).fail(function(data){
+              alert('Ошибка');
+            });
+          }
+        });
+      }
+    }
