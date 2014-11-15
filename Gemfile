@@ -24,6 +24,10 @@ gem 'mime-types', require: 'mime/types'
 gem 'rmagick'
 gem 'mini_magick'
 
+gem 'vk-ruby'
+
+gem 'kaminari'
+
 gem 'activeadmin', github: 'activeadmin'
 gem 'devise'
 

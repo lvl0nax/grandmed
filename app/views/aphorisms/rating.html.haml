@@ -1,0 +1,43 @@
+- content_for :js_src do
+  %script{:src => "//vk.com/js/api/openapi.js", :type => "text/javascript"}
+.navigation
+  .navigation_content
+    .navigation_content__page_title
+      Рейтинг участников
+    .navigation_content__button
+      = link_to 'УЧАСТВОВАТЬ В КОНКУРСЕ >', step_one_path, {class: 'white_button_link'}
+.main_content
+  .main_content__rules_text.main_content__rating
+    .rating_item.header_rating_item
+      .rating_item__name
+        Участники
+      .rating_item__aphorism
+        Афоризмы
+      .rating_item__rate
+        Рейтинг
+      .clearfix
+
+    - @aphorisms.each_with_index do |aphorism, i|
+      - index = (i+1)+((@page-1)*5)
+      - top = index < 4
+      .rating_item
+        .rating_item__name{ class: ('rating_top' if top) }
+          = "#{index}. #{aphorism.username}"
+          - if top
+            = image_tag('karona.jpg')
+        .rating_item__aphorism
+          %a{ href: step_three_path(aphorism.id) }
+            = image_tag aphorism.image_url(:thumb)
+        .rating_item__rate
+          = aphorism.rating.to_i
+        .clearfix
+
+  .main_content__vk_widget#vk_groups
+
+  .clearfix
+
+  .rating_pagination
+    = paginate @aphorisms
+
+:javascript
+  VK.Widgets.Group("vk_groups", {mode: 0, width: "300", height: "250"}, 32373473);

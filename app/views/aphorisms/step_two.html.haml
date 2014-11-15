@@ -9,6 +9,12 @@
         Добавьте афоризм
       .step_content__body__input
         %textarea{ cols: 60, rows: 10, id: 'aphorism_input' }
+        .notification.js_notificationd
+          Вы можете ввести не более 270 символов. Осталось:
+          %span.js_notification_count
+            270
+          символа(ов)
+
       .step_content__body__text
         Текст-подсказка: lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
       .step_content__body__actions
@@ -17,14 +23,20 @@
   .aphorisms_title
     Лучшие афоризмы
   .backgrounds_list
-    - @aphorisms.each_with_index do |background, i|
+    - @aphorisms.each do |background|
       .background_image{data: { img: background.image_url(:thumb) }}
-        = image_tag background.image_url(:thumb)
+        %a{ href: step_three_path(background.id) }
+          = image_tag background.image_url(:thumb)
 
 :javascript
   $('#aphorism_input').on('keydown', function(e) {
-    if ($('#aphorism_input').val().length > 270){
+    if ($('#aphorism_input').val().length > 269){
+      $('.js_notification').addClass('error_notification');
       e.preventDefault();
+    }else{
+      $('.error_notification').removeClass('error_notification');
     }
+
+    $('.js_notification_count').text(270 - $('#aphorism_input').val().length);
     $('.js_aphorism_text').text($('#aphorism_input').val());
   });
