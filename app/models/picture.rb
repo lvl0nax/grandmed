@@ -8,7 +8,7 @@ class Picture < ActiveRecord::Base
     pic = Picture.new
     img =  ImageList.new('public'+bkgnd.image_url(:big))
     txt = Draw.new
-    str = text.gsub(/(.{1,#{38}})(\s+|$)/, "\\1\n").strip
+    str = text.gsub(/(.{1,#{38}})(\s+|$)/, "\\1\n").strip.first(270)
     img.annotate(txt, 0,0,0,50, str){
       txt.pointsize = 25
       #txt.stroke = '#000000'

@@ -15,12 +15,13 @@
       = link_to 'УЧАСТВОВАТЬ В КОНКУРСЕ >', step_one_path, {class: 'white_button_link'}
 
     .main_content__text__links
-      = link_to 'Правила конкурса', '#'
-      = link_to 'Рейтинг участников', '#'
+      = link_to 'Правила конкурса', rules_path
+      = link_to 'Рейтинг участников', ratings_path
 
-    .main_content__text__aphorisms
-      .main_content__text__aphorisms__title
-        Лучшие афоризмы:
-      .main_content__text__aphorisms__top
-        - Picture.last(3).each do |pic|
-          = image_tag pic.image_url(:thumb)
+    - if Picture.any?
+      .main_content__text__aphorisms
+        .main_content__text__aphorisms__title
+          Лучшие афоризмы:
+        .main_content__text__aphorisms__top
+          - Picture.last(3).each do |pic|
+            = image_tag pic.image_url(:thumb)

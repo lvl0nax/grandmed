@@ -2,8 +2,10 @@
 %html
   %head
     %title GrandMed
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
+    = yield :js_src
+    -#%script{:src => 'http://vk.com/js/api/openapi.js', :type => 'text/javascript'}
     = csrf_meta_tags
   %body
     .header
@@ -11,8 +13,8 @@
         Гранд-Афоризм
 
       .header__pages_links
-        %a.header__pages_links__rooles{href: '#'} Правила конкурса
-        %a.header__pages_links__rating{href: '#'} Рейтинг участников
+        %a.header__pages_links__rooles{href: rules_path} Правила конкурса
+        %a.header__pages_links__rating{href: ratings_path} Рейтинг участников
 
     .main_container
       = yield

@@ -1,0 +1,1 @@
+Grandmed::Application.config.secret_key_base = '16820b9e5e6fad471144cf638c1a6f9642e3389d545fdfe6ea75eb49c2f3f0cd2e210a46434f80ef18d9c01d9cb2ff8a6fa1e51ea527846726ec6b34070e8809'

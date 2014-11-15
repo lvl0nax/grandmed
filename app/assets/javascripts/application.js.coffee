@@ -12,7 +12,6 @@
 #
 #= require jquery
 #= require jquery_ujs
-#= require turbolinks
 #= require_tree .
 
 $(document).on 'click', '.js_background', (e) ->
@@ -29,7 +28,6 @@ $(document).on 'click', '.js_make_aphorism', (e) ->
   e.preventDefault()
   txt = $('#aphorism_input').val()
   id = $(e.currentTarget).data('bkg')
-  console.log '++++++++++++++++++++'
   $.ajax(
     type: 'POST'
     dataType: 'json'

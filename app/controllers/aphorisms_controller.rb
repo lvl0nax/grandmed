@@ -4,12 +4,16 @@ class AphorismsController < ApplicationController
 
   def home;  end
 
+  def rules
+    @aphorisms = Picture.last(5)
+  end
+
   def step_one
     @backgrounds = Background.first(10)
   end
 
   def step_two
-    @aphorisms = Picture.last(5)
+    @aphorisms = Picture.order(rating: :asc).first(5)
     @background = Background.find(params[:background].to_i)
   end
 
@@ -21,12 +25,35 @@ class AphorismsController < ApplicationController
     end
   end
 
+  def update_aphorism
+    pic = Picture.find params[:id]
+    if pic.update(
+          author: params[:author],
+          username: params[:username],
+          post_id: params[:post_id]
+        )
+      render json: {status: :ok}
+    end
+  end
+
   def step_three
-    @aphorisms = Picture.last(5)
+    @aphorisms = Picture.order(rating: :asc).first(5)
     @picture = Picture.find(params[:picture_id])
   end
 
+  def vk_answer
+    file = "public/uploads/picture/image/#{params[:photo].split('/')[-2]}/#{params[:photo].split('/').last}"
+    app = VK::Application.new(app_id: 4617493)
+    x = app.upload( url: params[:upload_url], file1: [file, 'image/jpeg'] )
+    render json: x.body
+  end
+
+  def rating
+    @page = (params[:page] || 1).to_i
+    @aphorisms = Picture.where.not(author: nil).order(rating: :asc).page( @page).per 5
+  end
+
   def permitted_params
-    params.permit [:image, :description, :author]
+    params.permit [:image, :description, :author, :username, :post_id]
   end
 end
