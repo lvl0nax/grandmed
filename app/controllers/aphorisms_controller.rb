@@ -13,7 +13,7 @@ class AphorismsController < ApplicationController
   end
 
   def step_two
-    @aphorisms = Picture.order(rating: :asc).first(5)
+    @aphorisms = Picture.order(rating: :desc).first(5)
     @background = Background.find(params[:background].to_i)
   end
 
@@ -37,7 +37,7 @@ class AphorismsController < ApplicationController
   end
 
   def step_three
-    @aphorisms = Picture.order(rating: :asc).first(5)
+    @aphorisms = Picture.order(rating: :desc).first(5)
     @picture = Picture.find(params[:picture_id])
   end
 
@@ -50,7 +50,7 @@ class AphorismsController < ApplicationController
 
   def rating
     @page = (params[:page] || 1).to_i
-    @aphorisms = Picture.where.not(author: nil).order(rating: :asc).page( @page).per 5
+    @aphorisms = Picture.where.not(author: nil).order(rating: :desc).page( @page).per 5
   end
 
   def permitted_params
