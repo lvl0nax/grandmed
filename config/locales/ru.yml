@@ -26,3 +26,8 @@ ru:
       last: '>>'
       first: '<'
       previous: '<<'
+  time:
+    formats:
+      default: "%Y-%m-%d"
+      short: "%b %d"
+      long: "%d-%m-%Y %H:%M"
