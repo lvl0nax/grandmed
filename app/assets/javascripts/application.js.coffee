@@ -27,6 +27,7 @@ $(document).on 'click', '.js_background', (e) ->
 $(document).on 'click', '.js_make_aphorism', (e) ->
   e.preventDefault()
   txt = $('#aphorism_input').val()
+  color = $('#picture_color').val()
   id = $(e.currentTarget).data('bkg')
   $.ajax(
     type: 'POST'
@@ -35,5 +36,6 @@ $(document).on 'click', '.js_make_aphorism', (e) ->
     data:
       image: id
       description: txt
+      color: color
   ).done (msg) ->
     window.location = msg.url

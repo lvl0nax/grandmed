@@ -20,7 +20,7 @@ class AphorismsController < ApplicationController
   def make_aphorism
     txt = params[:description]
     bkg = Background.find(params[:image].to_i)
-    if (p = Picture.make_with_text(txt, bkg))
+    if (p = Picture.make_with_text(txt, bkg, params[:color]))
       render json: { url: step_three_path(p.id) }
     end
   end
@@ -50,7 +50,7 @@ class AphorismsController < ApplicationController
 
   def rating
     @page = (params[:page] || 1).to_i
-    @aphorisms = Picture.where.not(author: nil).order(rating: :desc).page( @page).per 5
+    @aphorisms = Picture.where.not(author: nil).order('rating DESC NULLS LAST').page(@page).per 5
   end
 
   def permitted_params

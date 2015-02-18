@@ -9,14 +9,15 @@
         Добавьте афоризм
       .step_content__body__input
         %textarea{ cols: 60, rows: 10, id: 'aphorism_input' }
-        .notification.js_notificationd
+        .notification.js_notification
           Вы можете ввести не более 270 символов. Осталось:
           %span.js_notification_count
             270
           символа(ов)
-
+        = label_tag 'Выберите цвет'
+        = color_field :picture, :color
       .step_content__body__text
-        Текст-подсказка: lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Напишите Ваш афоризм.
       .step_content__body__actions
         = link_to 'ОПУБЛИКУЙТЕ АФОРИЗМ >', '#', {class: 'red_button_link js_make_aphorism', data: {bkg: params[:background]}}
   .clearfix
@@ -29,7 +30,20 @@
           = image_tag background.image_url(:thumb)
 
 :javascript
+  $('#picture_color').on('change', function(e){
+    clr = $('#picture_color').val();
+    $('.js_aphorism_text').css('color', clr);
+  });
   $('#aphorism_input').on('keydown', function(e) {
+    if ($('#aphorism_input').val().length > 269){
+      $('.js_notification').addClass('error_notification');
+      e.preventDefault();
+    }
+  });
+  $('#aphorism_input').on('keyup', function(e) {
+    console.log($('#aphorism_input').val().length);
+    console.log($('#aphorism_input').val().length > 269);
+    clr = $('#picture_color').val();
     if ($('#aphorism_input').val().length > 269){
       $('.js_notification').addClass('error_notification');
       e.preventDefault();
@@ -38,5 +52,5 @@
     }
 
     $('.js_notification_count').text(270 - $('#aphorism_input').val().length);
-    $('.js_aphorism_text').text($('#aphorism_input').val());
+    $('.js_aphorism_text').text($('#aphorism_input').val()).css('color', clr);
   });
