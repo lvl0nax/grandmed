@@ -23,6 +23,9 @@
           .step_content__body__title
             Опубликуйте афоризм
           .step_content__body__text
+          -if @text
+            = @text.step3.html_safe
+          - else
             Текст-подсказка: lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
           .step_content__body__actions
             = link_to 'ОПУБЛИКОВАТЬ АФОРИЗМ >', '#', {class: 'red_button_link js_public_aphorism', data: {pic: params[:picture_id]}}
@@ -32,7 +35,10 @@
           .step_content__body__title
             Авторизуйтесь через ВКонтакте
           .step_content__body__text
-            Пожалуйста, войдите через виджет Вконтакте. Авторизация необходима только для сбора статистики по опубликованному во ВКонтакте грандмед-афоризму.
+            -if @text
+              = @text.authorize.html_safe
+            - else
+              Пожалуйста, войдите через виджет Вконтакте. Авторизация необходима только для сбора статистики по опубликованному во ВКонтакте грандмед-афоризму.
           .step_content__body__actions
 
             #login_button{onclick: 'VK.Auth.login(authInfo, VK.access.PHOTOS);'}

@@ -7,7 +7,10 @@
       .step_content__body__title
         Выберите дизайн фона
       .step_content__body__text
-        Выберите дизайн фона для Вашего Гранд-Афоризма из предложенных ниже иллюстраций.
+        -if @text
+          = @text.step1.html_safe
+        - else
+          Выберите дизайн фона для Вашего Гранд-Афоризма из предложенных ниже иллюстраций.
       .step_content__body__actions
         = link_to 'ДОБАВИТЬ АФОРИЗМ >', step_two_path(background: @backgrounds.first.id), {class: 'red_button_link js_next_step_link'}
   .clearfix

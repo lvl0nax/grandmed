@@ -31,6 +31,11 @@
         .rating_item__rate
           = aphorism.rating.to_i
         .clearfix
+    %br
+    %br
+    %br
+    -if @text
+      = @text.rating.html_safe
 
   .main_content__vk_widget#vk_groups
 

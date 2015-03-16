@@ -1,0 +1,20 @@
+= semantic_form_for [:admin, @text]  do |f|
+  = f.semantic_errors *f.object.errors.keys
+  =f.inputs 'Title' do
+    = f.input :title, label: false
+  =f.inputs 'Main page text' do
+    = f.input :home, as: :ckeditor, label: false
+  =f.inputs 'Rules page text' do
+    = f.input :rules, as: :ckeditor, label: false
+  =f.inputs 'Ratings page text' do
+    = f.input :rating, as: :ckeditor, label: false
+  =f.inputs 'Step1 page text' do
+    = f.input :step1, as: :ckeditor, label: false
+  =f.inputs 'Step2 page text' do
+    = f.input :step2, as: :ckeditor, label: false
+  =f.inputs 'Step3 page text' do
+    = f.input :step3, as: :ckeditor, label: false
+  =f.inputs 'Authorize page text' do
+    = f.input :authorize, as: :ckeditor, label: false
+
+  = f.actions

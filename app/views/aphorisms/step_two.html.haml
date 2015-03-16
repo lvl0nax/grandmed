@@ -17,7 +17,10 @@
         = label_tag 'Выберите цвет'
         = color_field :picture, :color
       .step_content__body__text
-        Напишите Ваш афоризм.
+        -if @text
+          = @text.step2.html_safe
+        - else
+          Напишите Ваш афоризм.
       .step_content__body__actions
         = link_to 'ОПУБЛИКУЙТЕ АФОРИЗМ >', '#', {class: 'red_button_link js_make_aphorism', data: {bkg: params[:background]}}
   .clearfix
@@ -41,8 +44,6 @@
     }
   });
   $('#aphorism_input').on('keyup', function(e) {
-    console.log($('#aphorism_input').val().length);
-    console.log($('#aphorism_input').val().length > 269);
     clr = $('#picture_color').val();
     if ($('#aphorism_input').val().length > 269){
       $('.js_notification').addClass('error_notification');
@@ -52,5 +53,5 @@
     }
 
     $('.js_notification_count').text(270 - $('#aphorism_input').val().length);
-    $('.js_aphorism_text').text($('#aphorism_input').val()).css('color', clr);
+    $('.js_aphorism_text').html($('#aphorism_input').val().replace(/(?:\r\n|\r|\n)/g, '<br />')).css('color', clr);
   });
