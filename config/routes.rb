@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  mount Ckeditor::Engine => '/ckeditor'
   get 'aphorisms/rules' => 'aphorisms#rules', as: 'rules'
   get 'aphorisms/ratings' => 'aphorisms#rating', as: 'ratings'
   get 'aphorisms/first_step' => 'aphorisms#step_one', as: 'step_one'
