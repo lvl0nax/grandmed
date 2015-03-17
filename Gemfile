@@ -29,7 +29,7 @@ gem 'vk-ruby'
 gem 'kaminari'
 
 gem 'activeadmin', github: 'activeadmin'
-gem 'ckeditor'
+gem 'redactor-rails'
 gem 'devise'
 
 # Use jquery as the JavaScript library

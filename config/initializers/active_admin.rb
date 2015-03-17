@@ -239,5 +239,6 @@ ActiveAdmin.setup do |config|
   # You can enable or disable them for all resources here.
   #
   # config.filters = true
-  config.register_javascript 'ckeditor/init.js'
+  config.register_stylesheet 'redactor-rails.css'
+  config.register_javascript 'redactor-rails.js'
 end
