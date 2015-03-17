@@ -240,5 +240,4 @@ ActiveAdmin.setup do |config|
   #
   # config.filters = true
   config.register_stylesheet 'redactor-rails.css'
-  config.register_javascript 'redactor-rails.js'
 end
