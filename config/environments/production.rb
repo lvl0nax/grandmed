@@ -31,9 +31,6 @@ Rails.application.configure do
 
   # Generate digests for assets URLs.
   config.assets.digest = true
-
-  config.assets.version = '1.0'
-  config.assets.precompile += %w( ckeditor/* application.js)
   # `config.assets.precompile` has moved to config/initializers/assets.rb
 
   # Specifies the header that your server uses for sending files.

@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  mount Ckeditor::Engine => '/ckeditor'
   get 'aphorisms/rules' => 'aphorisms#rules', as: 'rules'
   get 'aphorisms/ratings' => 'aphorisms#rating', as: 'ratings'
   get 'aphorisms/first_step' => 'aphorisms#step_one', as: 'step_one'
@@ -10,6 +9,7 @@ Rails.application.routes.draw do
   post 'make_aphorism' => 'aphorisms#make_aphorism', as: 'make_aphorism'
   post 'update_aphorism' => 'aphorisms#update_aphorism', as: 'update_aphorism'
 
+  mount Ckeditor::Engine => '/ckeditor'
   root 'aphorisms#home'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
