@@ -53,6 +53,19 @@
 }
 
 /*--------------step_two---------------*/
+.align_field{
+  width: 150px;
+  display: inline-block;
+  label{
+    display: inline-block;
+    width: 150px;
+    text-align: center;
+  }
+  input{
+    width: 150px;
+    margin: 5px auto;
+  }
+}
 .step_content__body__input{
   margin-bottom: 15px;
 }

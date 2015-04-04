@@ -9,7 +9,7 @@ class AphorismsController < ApplicationController
   end
 
   def step_one
-    @backgrounds = Background.first(10)
+    @backgrounds = Background.all
   end
 
   def step_two
@@ -20,7 +20,7 @@ class AphorismsController < ApplicationController
   def make_aphorism
     txt = params[:description]
     bkg = Background.find(params[:image].to_i)
-    if (p = Picture.make_with_text(txt, bkg, params[:color]))
+    if (p = Picture.make_with_text(txt, bkg, params[:color], params[:align]))
       render json: { url: step_three_path(p.id) }
     end
   end

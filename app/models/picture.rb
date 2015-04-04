@@ -4,18 +4,23 @@ class Picture < ActiveRecord::Base
   require 'RMagick'
   include Magick
 
-  def self.make_with_text(text, bkgnd, color)
+  def self.make_with_text(text, bkgnd, color = '#fff', pos = 'center')
+    align = {
+              'left'   => NorthWestGravity,
+              'right'  => NorthEastGravity,
+              'center' => NorthGravity
+            }
     pic = Picture.new
     img =  ImageList.new('public'+bkgnd.image_url(:big))
     txt = Draw.new
     str = text.gsub(/(.{1,#{38}})(\s+|$)/, "\\1\n").strip.first(270)
-    img.annotate(txt, 0,0,0,50, str){
+    img.annotate(txt, 500,290,13,50, str){
       txt.pointsize = 26
       txt.font_family = 'Liberation Sans'
       #txt.stroke = '#000000'
       txt.font_weight = 700
       txt.fill = color
-      txt.gravity = NorthGravity
+      txt.gravity = align[pos]
     }
 
     img.write('test.jpg')
