@@ -4,6 +4,8 @@ class Picture < ActiveRecord::Base
   require 'RMagick'
   include Magick
 
+  scope :best, -> { where.not(author: nil).order('rating DESC NULLS LAST') }
+
   def self.make_with_text(text, bkgnd, color = '#fff', pos = 'center')
     align = {
               'left'   => NorthWestGravity,

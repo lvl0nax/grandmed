@@ -26,5 +26,5 @@
         .main_content__text__aphorisms__title
           Лучшие афоризмы:
         .main_content__text__aphorisms__top
-          - Picture.last(3).each do |pic|
+          - Picture.best.last(3).each do |pic|
             = image_tag pic.image_url(:thumb)
