@@ -15,14 +15,17 @@ class Picture < ActiveRecord::Base
     pic = Picture.new
     img =  ImageList.new('public'+bkgnd.image_url(:big))
     txt = Draw.new
-    str = text.gsub(/(.{1,#{38}})(\s+|$)/, "\\1\n").strip.first(270)
-    img.annotate(txt, 500,290,13,50, str){
+    # 18 is length of strings in the image text
+    str = text.gsub(/(.{1,#{18}})(\s+|$)/, "\\1\n").strip.first(270)
+    # 240 width of the text rectangle
+    # 290 height of the text rectangle
+    img.annotate(txt, 240,290,13,50, str){
       txt.pointsize = 26
       txt.font_family = 'Liberation Sans'
       #txt.stroke = '#000000'
       txt.font_weight = 700
       txt.fill = color
-      txt.gravity = align[pos]
+      txt.gravity = NorthGravity # align[pos]
     }
 
     img.write('test.jpg')

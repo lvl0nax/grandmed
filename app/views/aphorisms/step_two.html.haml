@@ -1,4 +1,7 @@
-= javascript_include_tag '/assets/jscolor/jscolor'
+- if Rails.env.development?
+  = javascript_include_tag '/jscolor/jscolor'
+- else
+  = javascript_include_tag '/assets/jscolor/jscolor'
 = render 'navigation'
 .main_content
   .step_content
