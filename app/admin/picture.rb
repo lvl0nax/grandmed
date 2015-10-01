@@ -24,7 +24,7 @@ ActiveAdmin.register Picture do
 
   controller do
     def permitted_params
-      params.permit picture: [:image, :description, :author]
+      params.permit picture: [:image, :description, :author, :rating]
     end
   end
 
